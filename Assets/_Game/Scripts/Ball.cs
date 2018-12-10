@@ -11,13 +11,20 @@ public class Ball : MonoBehaviour
     float offsetZAxis = 2f;
 
     Rigidbody2D rigidBody;
+    Animator animator;
     Vector3 direction;
     public bool isPlaying = false;
 
     private void Awake()
     {
+        EventManager.EventMenuLoaded += OnMenuLoaded;
         EventManager.EventGameStarted += OnGameStarted;
         EventManager.EventGameOver += OnGameOver;
+    }
+
+    private void Start()
+    {
+        animator = GetComponentInParent<Animator>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -68,6 +75,8 @@ public class Ball : MonoBehaviour
         rigidBody.velocity = speed * (direction + Vector3.up) + new Vector3(0f, 0f, offsetZAxis);
         direction = -direction;
 
+        animator.SetTrigger("GameStart");
+
         EventManager.EventGameStarted -= OnGameStarted;
     }
 
@@ -75,5 +84,10 @@ public class Ball : MonoBehaviour
     {
         rigidBody.velocity = Vector3.zero;
         EventManager.EventGameOver -= OnGameOver;
+    }
+
+    private void OnMenuLoaded()
+    {
+        EventManager.EventMenuLoaded -= OnMenuLoaded;
     }
 }
