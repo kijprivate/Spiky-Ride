@@ -13,6 +13,7 @@ public class Ball : MonoBehaviour
     Rigidbody2D rigidBody;
     Animator animator;
     Vector3 direction;
+    Vector3 lookDirection;
     public bool isPlaying = false;
 
     private void Awake()
@@ -24,7 +25,9 @@ public class Ball : MonoBehaviour
 
     private void Start()
     {
+        rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponentInParent<Animator>();
+        rigidBody.gravityScale = 0f;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -36,11 +39,23 @@ public class Ball : MonoBehaviour
 
         if(collision.tag == "Wall")
         {
-            rigidBody.velocity = speed * (direction + Vector3.up) + new Vector3(0f, 0f, offsetZAxis);
-            if (speed > 8f)
-            { speed -= 1f; }
+            //rigidBody.AddForce(Vector2.up * speed);
+            //rigidBody.velocity = speed * (direction + Vector3.up) + new Vector3(0f, 0f, offsetZAxis);
+            //if (speed > 8f)
+            //{ speed -= 1f; }
+            //direction = -direction;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Wall")
+        {
+            animator.SetTrigger("WallCollision");
+            rigidBody.AddForce(Vector3.up * speed*45f+ direction*speed*10f);
             direction = -direction;
         }
+
     }
 
     private void Update()
@@ -49,9 +64,13 @@ public class Ball : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0) && isPlaying)
         {
-            rigidBody.velocity = -20f * direction;
+            // rigidBody.velocity = -20f * direction;
+            rigidBody.AddForce(-Vector3.up - direction * speed * 100f);
             speed += 1f;
         }
+        lookDirection = rigidBody.velocity.normalized;
+        Vector3 test = new Vector3(0f, 0f, lookDirection.x);
+        transform.rotation = Quaternion.LookRotation(test);
     }
 
     private void SetTouchArea()
@@ -70,10 +89,11 @@ public class Ball : MonoBehaviour
 
     private void OnGameStarted()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
         direction = Vector3.right;
         rigidBody.velocity = speed * (direction + Vector3.up) + new Vector3(0f, 0f, offsetZAxis);
         direction = -direction;
+
+        //rigidBody.gravityScale = 0.5f;
 
         animator.SetTrigger("GameStart");
 

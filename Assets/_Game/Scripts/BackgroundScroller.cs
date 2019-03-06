@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BackgroundScroller : MonoBehaviour
 {
-    [SerializeField]
     float backgroundScrollSpeed = 0.5f;
+    Ball ball;
     Material myMaterial;
     Vector2 offSet;
     bool scrollBackground = false;
@@ -18,6 +18,8 @@ public class BackgroundScroller : MonoBehaviour
 
     void Start()
     {
+        ball = FindObjectOfType<Ball>();
+ 
         myMaterial = GetComponent<Renderer>().material;
         offSet = new Vector2(0f, backgroundScrollSpeed);
     }
@@ -26,6 +28,8 @@ public class BackgroundScroller : MonoBehaviour
     {
         if (!scrollBackground) { return; }
         myMaterial.mainTextureOffset += offSet * Time.deltaTime;
+        backgroundScrollSpeed = ball.GetComponent<Rigidbody2D>().velocity.y;
+        print(ball.GetComponent<Rigidbody2D>().velocity.normalized.y);
     }
 
     private void OnGameStarted()

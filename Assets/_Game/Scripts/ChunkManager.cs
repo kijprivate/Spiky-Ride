@@ -11,7 +11,7 @@ public class ChunkManager : MonoBehaviour
 
     Ball ball;
     int randomChunk;
-    Vector2 newChunkPos;
+    Vector3 newChunkPos;
 
     void Start()
     {
@@ -22,15 +22,22 @@ public class ChunkManager : MonoBehaviour
     void Update()
     {
 
-        if (numberOfChunks < 2 && ball.isPlaying)
+        if (numberOfChunks < 3 && ball.isPlaying)
         {
             spawnNextChunk += 10f;
-            newChunkPos = new Vector2(0f, spawnNextChunk);
+            newChunkPos = new Vector3(0f, spawnNextChunk,0f);
 
             randomChunk = Random.Range(0, chunks.Length);
             // print(randomChunk);
             Instantiate(chunks[randomChunk], newChunkPos, Quaternion.identity);
             numberOfChunks += 1;
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        print(other.name);
+        Destroy(other.gameObject);
+        numberOfChunks--;
     }
 }

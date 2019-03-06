@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 22b9d0852adc316448cca66ed12df1b8
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: MobilesFont
+  fontNames:
+  - MobilesFont
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: ece9e97b98653b0448dda4010dbe7322, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
