@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour
 {
+    [SerializeField]
+    GameObject gameOverPanel;
+
     [SerializeField, Tooltip("Child of this canvas object")]
     Text gemsText;
 
@@ -56,6 +59,8 @@ public class CanvasManager : MonoBehaviour
         //else if (countDistance < 10f || progresBarShowed)
         //{ gameOverPanel.SetActive(true); }
 
+        gameOverPanel.SetActive(true);
+
         EventManager.EventGameOver -= OnGameOver;
     }
 
@@ -63,5 +68,11 @@ public class CanvasManager : MonoBehaviour
     {
         animator.SetTrigger("FadeOut");
         EventManager.EventGameStarted -= OnGameStarted;
+    }
+
+    public void ClearEvent()
+    {
+        EventManager.EventGameOver -= OnGameOver;
+        //EventManager.EventGameResumed -= OnGameResumed;
     }
 }

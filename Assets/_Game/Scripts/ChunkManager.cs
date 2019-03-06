@@ -6,7 +6,7 @@ public class ChunkManager : MonoBehaviour
 {
 
     public GameObject[] chunks;
-    public float spawnNextChunk = 12f;
+    public float spawnNextChunk = 6f;
     public int numberOfChunks = 0;
 
     Ball ball;
@@ -22,7 +22,7 @@ public class ChunkManager : MonoBehaviour
     void Update()
     {
 
-        if (numberOfChunks < 3 && ball.isPlaying)
+        if (numberOfChunks < 4 && ball.isPlaying)
         {
             spawnNextChunk += 10f;
             newChunkPos = new Vector3(0f, spawnNextChunk,0f);

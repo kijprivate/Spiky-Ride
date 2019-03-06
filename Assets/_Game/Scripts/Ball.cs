@@ -52,7 +52,8 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.tag == "Wall")
         {
             animator.SetTrigger("WallCollision");
-            rigidBody.AddForce(Vector3.up * speed*45f+ direction*speed*10f);
+           // rigidBody.AddForce(Vector3.up * speed*45f+ direction*speed*10f);
+            rigidBody.AddForce(Vector3.up*speed*45f+direction*Mathf.Abs(rigidBody.velocity.x)*speed*2f);
             direction = -direction;
         }
 
@@ -65,12 +66,13 @@ public class Ball : MonoBehaviour
         if(Input.GetMouseButtonDown(0) && isPlaying)
         {
             // rigidBody.velocity = -20f * direction;
-            rigidBody.AddForce(-Vector3.up - direction * speed * 100f);
-            speed += 1f;
+            rigidBody.AddForce(-Vector3.up - direction * speed * 80f);
+            speed += 0.5f;
         }
-        lookDirection = rigidBody.velocity.normalized;
-        Vector3 test = new Vector3(0f, 0f, lookDirection.x);
-        transform.rotation = Quaternion.LookRotation(test);
+        transform.LookAt(transform.localPosition + new Vector3(0f,0f, rigidBody.velocity.x));
+        //lookDirection = rigidBody.velocity.normalized;
+        //Vector3 test = new Vector3(0f, 0f, lookDirection.x);
+        //transform.rotation = Quaternion.LookRotation(test);
     }
 
     private void SetTouchArea()
@@ -109,5 +111,11 @@ public class Ball : MonoBehaviour
     private void OnMenuLoaded()
     {
         EventManager.EventMenuLoaded -= OnMenuLoaded;
+    }
+
+    public void ClearEvent()
+    {
+        EventManager.EventGameOver -= OnGameOver;
+        //EventManager.EventGameResumed -= OnGameResumed;
     }
 }
