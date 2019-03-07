@@ -53,7 +53,7 @@ public class Ball : MonoBehaviour
         {
             animator.SetTrigger("WallCollision");
            // rigidBody.AddForce(Vector3.up * speed*45f+ direction*speed*10f);
-            rigidBody.AddForce(Vector3.up*speed*45f+direction*Mathf.Abs(rigidBody.velocity.x)*speed*2f);
+            rigidBody.AddForce(Vector3.up*speed*1400f*Time.deltaTime+direction*Mathf.Abs(rigidBody.velocity.x)*speed*120f*Time.deltaTime);
             direction = -direction;
         }
 
@@ -66,10 +66,10 @@ public class Ball : MonoBehaviour
         if(Input.GetMouseButtonDown(0) && isPlaying)
         {
             // rigidBody.velocity = -20f * direction;
-            rigidBody.AddForce(-Vector3.up - direction * speed * 80f);
-            speed += 0.5f;
+            rigidBody.AddForce(-Vector3.up - direction * speed * 3200f*Time.deltaTime);
+            speed += 0.2f;
         }
-        transform.LookAt(transform.localPosition + new Vector3(0f,0f, rigidBody.velocity.x));
+        transform.LookAt(transform.localPosition + new Vector3(0f,0f, rigidBody.velocity.y));
         //lookDirection = rigidBody.velocity.normalized;
         //Vector3 test = new Vector3(0f, 0f, lookDirection.x);
         //transform.rotation = Quaternion.LookRotation(test);

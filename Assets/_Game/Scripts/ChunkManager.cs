@@ -16,13 +16,14 @@ public class ChunkManager : MonoBehaviour
     void Start()
     {
         ball = FindObjectOfType<Ball>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (numberOfChunks < 4 && ball.isPlaying)
+        if (numberOfChunks < 4 && ball.isPlaying) //TODO remove from update
         {
             spawnNextChunk += 10f;
             newChunkPos = new Vector3(0f, spawnNextChunk,0f);
