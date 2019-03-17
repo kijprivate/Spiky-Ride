@@ -14,6 +14,7 @@ public class Ball : MonoBehaviour
     Animator animator;
     Vector3 direction;
     Vector3 lookDirection;
+    bool clicked;
     public bool isPlaying = false;
 
     private void Awake()
@@ -21,13 +22,6 @@ public class Ball : MonoBehaviour
         EventManager.EventMenuLoaded += OnMenuLoaded;
         EventManager.EventGameStarted += OnGameStarted;
         EventManager.EventGameOver += OnGameOver;
-    }
-
-    private void Start()
-    {
-        rigidBody = GetComponent<Rigidbody2D>();
-        animator = GetComponentInParent<Animator>();
-        rigidBody.gravityScale = 0f;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -39,40 +33,28 @@ public class Ball : MonoBehaviour
 
         if(collision.tag == "Wall")
         {
-            //rigidBody.AddForce(Vector2.up * speed);
-            //rigidBody.velocity = speed * (direction + Vector3.up) + new Vector3(0f, 0f, offsetZAxis);
-            //if (speed > 8f)
-            //{ speed -= 1f; }
-            //direction = -direction;
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Wall")
-        {
-            animator.SetTrigger("WallCollision");
-           // rigidBody.AddForce(Vector3.up * speed*45f+ direction*speed*10f);
-            rigidBody.AddForce(Vector3.up*speed*1400f*Time.deltaTime+direction*Mathf.Abs(rigidBody.velocity.x)*speed*120f*Time.deltaTime);
             direction = -direction;
+            clicked = false;
         }
-
     }
 
     private void Update()
     {
         SetTouchArea();
 
+        if(isPlaying && !clicked)
+        {
+            transform.position += (direction+Vector3.up)*Time.deltaTime * speed;
+        }
+        else if(isPlaying && clicked)
+        {
+            transform.position += direction * Time.deltaTime * speed*3;
+        }
         if(Input.GetMouseButtonDown(0) && isPlaying)
         {
-            // rigidBody.velocity = -20f * direction;
-            rigidBody.AddForce(-Vector3.up - direction * speed * 3200f*Time.deltaTime);
+            clicked = true;
             speed += 0.2f;
         }
-        transform.LookAt(transform.localPosition + new Vector3(0f,0f, rigidBody.velocity.y));
-        //lookDirection = rigidBody.velocity.normalized;
-        //Vector3 test = new Vector3(0f, 0f, lookDirection.x);
-        //transform.rotation = Quaternion.LookRotation(test);
     }
 
     private void SetTouchArea()
@@ -92,19 +74,13 @@ public class Ball : MonoBehaviour
     private void OnGameStarted()
     {
         direction = Vector3.right;
-        rigidBody.velocity = speed * (direction + Vector3.up) + new Vector3(0f, 0f, offsetZAxis);
-        direction = -direction;
-
-        //rigidBody.gravityScale = 0.5f;
-
-        animator.SetTrigger("GameStart");
 
         EventManager.EventGameStarted -= OnGameStarted;
     }
 
     private void OnGameOver()
     {
-        rigidBody.velocity = Vector3.zero;
+       // rigidBody.velocity = Vector3.zero;
         EventManager.EventGameOver -= OnGameOver;
     }
 
