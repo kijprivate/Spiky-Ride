@@ -8,46 +8,40 @@ public class CanvasManager : MonoBehaviour
     [SerializeField]
     GameObject gameOverPanel;
 
-    [SerializeField, Tooltip("Child of this canvas object")]
-    Text gemsText;
+    [SerializeField]
+    GameObject MenuUI;
 
-    [SerializeField, Tooltip("Child of this canvas object")]
+    [SerializeField]
+    GameObject GameplayUI;
+
+    [SerializeField]
     Text gamesPlayed;
 
-    [SerializeField, Tooltip("Child of this canvas object")]
+    [SerializeField]
     Text highScore;
 
-    Animator animator;
+    [SerializeField]
+    Text scoreGameplay;
+
+    Player player;
 
     private void Awake()
     {
         EventManager.EventGameStarted += OnGameStarted;
         EventManager.EventGameOver += OnGameOver;
-    }
-    void Start()
-    {
-        animator = GetComponent<Animator>();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnMenuLoaded()
-    {
-        // Display UI values
-        gemsText.text = PlayerPrefsManager.GetNumberOfGems().ToString();
         gamesPlayed.text = "GAMES PLAYED: " + PlayerPrefsManager.GetGamesPlayed().ToString();
         highScore.text = "HIGH SCORE: " + PlayerPrefsManager.GetHighScore().ToString();
 
-        EventManager.EventMenuLoaded -= OnMenuLoaded;
+        player = FindObjectOfType<Player>();
     }
 
+    private void Update()
+    {
+        scoreGameplay.text = player.Distance.ToString();
+    }
     private void OnGameOver()
     {
-        PlayerPrefsManager.SetGamesPlayed(PlayerPrefsManager.GetGamesPlayed() + 1);
         //if (countDistance > PlayerPrefsManager.GetHighScore())
         //{ PlayerPrefsManager.SetHighScore(countDistance); }
 
@@ -60,19 +54,17 @@ public class CanvasManager : MonoBehaviour
         //{ gameOverPanel.SetActive(true); }
 
         gameOverPanel.SetActive(true);
-
-        EventManager.EventGameOver -= OnGameOver;
     }
 
     private void OnGameStarted()
     {
-        animator.SetTrigger("FadeOut");
-        EventManager.EventGameStarted -= OnGameStarted;
+        MenuUI.SetActive(false);
+        GameplayUI.SetActive(true);
     }
 
-    public void ClearEvent()
+    private void OnDestroy()
     {
         EventManager.EventGameOver -= OnGameOver;
-        //EventManager.EventGameResumed -= OnGameResumed;
+        EventManager.EventGameStarted -= OnGameStarted;
     }
 }

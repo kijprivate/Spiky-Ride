@@ -9,21 +9,12 @@ public class ChunkManager : MonoBehaviour
     public float spawnNextChunk = 6f;
     public int numberOfChunks = 0;
 
-    Ball ball;
     int randomChunk;
     Vector3 newChunkPos;
 
-    void Start()
-    {
-        ball = FindObjectOfType<Ball>();
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
-
-        if (numberOfChunks < 4 && ball.isPlaying) //TODO remove from update
+        if (numberOfChunks < 4) //TODO remove from update
         {
             spawnNextChunk += 20f;
             newChunkPos = new Vector3(0f, spawnNextChunk,0f);
@@ -37,7 +28,6 @@ public class ChunkManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print(other.name);
         Destroy(other.gameObject);
         numberOfChunks--;
     }
