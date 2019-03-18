@@ -25,7 +25,7 @@ public class ChunkManager : MonoBehaviour
 
         if (numberOfChunks < 4 && ball.isPlaying) //TODO remove from update
         {
-            spawnNextChunk += 10f;
+            spawnNextChunk += 20f;
             newChunkPos = new Vector3(0f, spawnNextChunk,0f);
 
             randomChunk = Random.Range(0, chunks.Length);

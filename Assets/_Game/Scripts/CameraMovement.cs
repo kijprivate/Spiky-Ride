@@ -6,9 +6,15 @@ public class CameraMovement : MonoBehaviour
 {
     [SerializeField]
     GameObject player;
+    [SerializeField]
+    float speed = 10f;
+
+    Vector3 destination;
 
     void Update()
     {
-        this.transform.position = new Vector3(0f, player.transform.position.y,0f);
+        destination = new Vector3(0f, player.transform.position.y,-1f);
+
+        transform.position = Vector3.Lerp(transform.position, destination, speed * Time.deltaTime);
     }
 }

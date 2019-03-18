@@ -8,7 +8,7 @@ public class Ball : MonoBehaviour
     float speed = 8f;
 
     [SerializeField]
-    float offsetZAxis = 2f;
+    float maxSpeed = 15f;
 
     Rigidbody2D rigidBody;
     Animator animator;
@@ -53,7 +53,10 @@ public class Ball : MonoBehaviour
         if(Input.GetMouseButtonDown(0) && isPlaying)
         {
             clicked = true;
-            speed += 0.2f;
+            if (speed < maxSpeed)
+            {
+                speed += 0.2f;
+            }
         }
     }
 
