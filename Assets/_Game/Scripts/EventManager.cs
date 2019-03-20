@@ -52,6 +52,12 @@ public static class EventManager
         if (EventGemsSubstracted != null) EventGemsSubstracted();
     }
 
+    public static Event EventCoinCollected;
+    public static void RaiseEventCoinCollected()
+    {
+        if (EventCoinCollected != null) EventCoinCollected();
+    }
+
     public static Event EventChooseBall;
     public static void RaiseEventChooseBall()
     {

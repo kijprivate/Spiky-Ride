@@ -42,6 +42,10 @@ public class LevelManager : MonoBehaviour
     {
         SceneManager.LoadScene(name);
     }
+    public void ReloadLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
     public void LoadSplashScreenWithDelay()
     {
         Invoke("SplashScreen", 5f);
