@@ -34,6 +34,12 @@ public static class EventManager
         if (EventGameStarted != null) EventGameStarted();
     }
 
+    public static Event EventEndLevel;
+    public static void RaiseEventEndLevel()
+    {
+        if (EventEndLevel != null) EventEndLevel();
+    }
+
     public static Event EventGameOver;
     public static void RaiseEventGameOver()
     {

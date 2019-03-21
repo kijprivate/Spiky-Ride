@@ -15,12 +15,6 @@ public class CanvasManager : MonoBehaviour
     GameObject GameplayUI;
 
     [SerializeField]
-    Text gamesPlayed;
-
-    [SerializeField]
-    Text highScore;
-
-    [SerializeField]
     Text coinText;
 
     [SerializeField]
@@ -36,8 +30,6 @@ public class CanvasManager : MonoBehaviour
         EventManager.EventGameStarted += OnGameStarted;
         EventManager.EventGameOver += OnGameOver;
 
-        gamesPlayed.text = "GAMES PLAYED: " + PlayerPrefsManager.GetGamesPlayed().ToString();
-        highScore.text = "HIGH SCORE: " + PlayerPrefsManager.GetHighScore().ToString();
         coinText.text = PlayerPrefsManager.GetNumberOfCoins().ToString();
         keysText.text = PlayerPrefsManager.GetNumberOfKeys().ToString();
 

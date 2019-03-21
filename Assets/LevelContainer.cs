@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelContainer : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class LevelContainer : MonoBehaviour
     {
         EventManager.EventGameOver += OnGameOver;
         EventManager.EventCoinCollected += OnCoinCollected;
+        EventManager.EventEndLevel += OnEndLevel;
     }
 
     private void OnGameOver()
@@ -24,10 +26,17 @@ public class LevelContainer : MonoBehaviour
         Coins += coinValue;
     }
 
+    private void OnEndLevel()
+    {
+        PlayerPrefsManager.SetNumberOfCoins(PlayerPrefsManager.GetNumberOfCoins() + Coins);
+        PlayerPrefsManager.UnlockLevel(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
     private void OnDestroy()
     {
         EventManager.EventGameOver -= OnGameOver;
         EventManager.EventCoinCollected -= OnCoinCollected;
+        EventManager.EventEndLevel -= OnEndLevel;
         Coins = 0;
     }
 }

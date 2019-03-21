@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     {
         EventManager.EventGameStarted += OnGameStarted;
         EventManager.EventGameOver += OnGameOver;
+        EventManager.EventEndLevel += OnEndLevel;
 
         cashedTransform = transform;
     }
@@ -86,9 +87,16 @@ public class Player : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void OnEndLevel()
+    {
+        direction = Vector3.zero;
+        isPlaying = false;
+    }
+
     private void OnDestroy()
     {
         EventManager.EventGameOver -= OnGameOver;
         EventManager.EventGameStarted -= OnGameStarted;
+        EventManager.EventEndLevel -= OnEndLevel;
     }
 }

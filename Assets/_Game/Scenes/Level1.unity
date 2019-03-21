@@ -11344,11 +11344,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1011311244}
-  - component: {fileID: 1011311245}
+  - component: {fileID: 1011311248}
   - component: {fileID: 1011311246}
   - component: {fileID: 1011311247}
   m_Layer: 0
-  m_Name: ChunkManager
+  m_Name: ChunkSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11368,23 +11368,6 @@ Transform:
   m_Father: {fileID: 519420032}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1011311245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1011311243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa31d85257215b74997b8b0d7c084f4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chunks:
-  - {fileID: 5259687399403482795, guid: 4cd1ebdd862df5c47b26239e96d9b544, type: 3}
-  - {fileID: 5163085983548034741, guid: 465eaae13b2745346ab5159c9c0e114d, type: 3}
-  spawnNextChunk: 0
-  numberOfChunks: 0
 --- !u!65 &1011311246
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11414,6 +11397,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1011311248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011311243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bb84750410b29742b39b173d4e3e742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chunks:
+  - {fileID: 5259687399403482795, guid: 4cd1ebdd862df5c47b26239e96d9b544, type: 3}
+  - {fileID: 5163085983548034741, guid: 465eaae13b2745346ab5159c9c0e114d, type: 3}
+  endLevelCollider: {fileID: 1785778204946830086, guid: 538a5b2d364cdb04c9bccbbde658fcf1,
+    type: 3}
+  spawnNextChunk: 0
+  numberOfChunks: 3
 --- !u!1 &1016514933
 GameObject:
   m_ObjectHideFlags: 0
@@ -12188,6 +12190,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1183585426 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3006644982104761458, guid: 6d84d69b90f4f284f9b4d5c750086b43,
+    type: 3}
+  m_PrefabInstance: {fileID: 4071566916030915562}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1190853094
 GameObject:
   m_ObjectHideFlags: 0
@@ -18720,6 +18734,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4071566916392496709, guid: 6d84d69b90f4f284f9b4d5c750086b43,
+        type: 3}
+      propertyPath: LevelName
+      value: 
+      objectReference: {fileID: 1183585426}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d84d69b90f4f284f9b4d5c750086b43, type: 3}
 --- !u!1001 &5724960560235195850

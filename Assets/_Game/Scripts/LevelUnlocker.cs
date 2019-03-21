@@ -10,10 +10,10 @@ public class LevelUnlocker : MonoBehaviour
     private void Update()
     {
         //TODO remove to Awake, in Update only for testing
-        //if(PlayerPrefsManager.IsLevelUnlocked(levelNumber))
-        //{
-        //    gameObject.GetComponent<Button>().enabled = false;
-        //    gameObject.GetComponent<Image>().enabled = false;
-        //}
+        if (PlayerPrefsManager.IsLevelUnlocked(levelNumber))
+        {
+            gameObject.GetComponent<Button>().enabled = false;
+            gameObject.GetComponent<Image>().enabled = false;
+        }
     }
 }
