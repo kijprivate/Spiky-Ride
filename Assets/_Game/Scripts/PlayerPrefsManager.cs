@@ -11,6 +11,8 @@ public class PlayerPrefsManager : MonoBehaviour
 
     const string NUMBER_OF_COINS = "number of coins";
     const string NUMBER_OF_KEYS = "number of keys";
+    const string NUMBER_OF_GOLDCHESTS = "number of goldchests";
+    const string NUMBER_OF_PLATCHESTS = "number of platchests";
 
     const string HIGH_SCORE = "high score";
     const string GAMES_PLAYED = "games played";
@@ -61,6 +63,26 @@ public class PlayerPrefsManager : MonoBehaviour
     public static int GetNumberOfKeys()
     {
         return PlayerPrefs.GetInt(NUMBER_OF_KEYS);
+    }
+
+    public static void SetNumberOfGoldChests(int value)
+    {
+        PlayerPrefs.SetInt(NUMBER_OF_GOLDCHESTS, value);
+    }
+
+    public static int GetNumberOfGoldChests()
+    {
+        return PlayerPrefs.GetInt(NUMBER_OF_GOLDCHESTS);
+    }
+
+    public static void SetNumberOfPlatChests(int value)
+    {
+        PlayerPrefs.SetInt(NUMBER_OF_PLATCHESTS, value);
+    }
+
+    public static int GetNumberOfPlatChests()
+    {
+        return PlayerPrefs.GetInt(NUMBER_OF_PLATCHESTS);
     }
 
     public static void SetHighScore(float value)

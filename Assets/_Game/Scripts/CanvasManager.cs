@@ -5,23 +5,15 @@ using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour
 {
-    [SerializeField]
-    GameObject gameOverPanel;
+    [SerializeField] GameObject gameOverPanel;
+    [SerializeField] GameObject MenuUI;
+    [SerializeField] GameObject GameplayUI;
 
-    [SerializeField]
-    GameObject MenuUI;
-
-    [SerializeField]
-    GameObject GameplayUI;
-
-    [SerializeField]
-    Text coinText;
-
-    [SerializeField]
-    Text keysText;
-
-    [SerializeField]
-    Text scoreGameplay;
+    [SerializeField] Text coinText;
+    [SerializeField] Text keysText;
+    [SerializeField] Text goldChestText;
+    [SerializeField] Text platChestText;
+    [SerializeField] Text scoreGameplay;
 
     Player player;
 
@@ -32,6 +24,8 @@ public class CanvasManager : MonoBehaviour
 
         coinText.text = PlayerPrefsManager.GetNumberOfCoins().ToString();
         keysText.text = PlayerPrefsManager.GetNumberOfKeys().ToString();
+        goldChestText.text = PlayerPrefsManager.GetNumberOfGoldChests().ToString();
+        platChestText.text = PlayerPrefsManager.GetNumberOfPlatChests().ToString();
 
         player = FindObjectOfType<Player>();
     }

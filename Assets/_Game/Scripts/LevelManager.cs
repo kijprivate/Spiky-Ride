@@ -46,6 +46,10 @@ public class LevelManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+    public void LoadNextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+    }
     public void LoadSplashScreenWithDelay()
     {
         Invoke("SplashScreen", 5f);
@@ -61,10 +65,10 @@ public class LevelManager : MonoBehaviour
     //    PlayerPrefsManager.SetNumberOfGems(PlayerPrefsManager.GetNumberOfGems() + 1000);
     //}
 
-    //public void LockAllBalls()
-    //{
-    //    PlayerPrefsManager.LockAllBalls();
-    //}
+    public void LockAllLevels()
+    {
+        PlayerPrefsManager.LockAllLevels();
+    }
 
 
 }

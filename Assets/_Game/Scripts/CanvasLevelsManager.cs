@@ -9,6 +9,10 @@ public class CanvasLevelsManager : MonoBehaviour
     [SerializeField] GameObject EndlessModeButton;
     [SerializeField] GameObject EndLevelPanel;
     [SerializeField] Text LevelName;
+    [SerializeField] Text coinsRewardText;
+    [SerializeField] Text keysRewardText;
+    [SerializeField] Text goldChestRewardText;
+    [SerializeField] Text platChestRewardText;
 
     private void Awake()
     {
@@ -27,6 +31,10 @@ public class CanvasLevelsManager : MonoBehaviour
     void OnEndLevel()
     {
         EndLevelPanel.SetActive(true);
+        coinsRewardText.text = LevelContainer.coinsReward.ToString();
+        keysRewardText.text = LevelContainer.keysForLevel.ToString();
+        goldChestRewardText.text = LevelContainer.goldChestForLevel.ToString();
+        platChestRewardText.text = LevelContainer.platChestForLevel.ToString();
     }
 
     private void OnDestroy()
